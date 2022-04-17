@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    watch当中可以开启异步任务，但是computed当中不能开启
+  -->
+  <div id='app'>
+    <div>
+      <span>姓：</span>
+      <input type="text" v-model="firstName">
+    </div>
+    <div>
+      <span>名：</span>
+      <input type="text" v-model="lastName">
+    </div>
+    <p>计算方式实现：{{ fullName1 }}</p>
+    <p>watch方式实现：{{ fullName2 }}</p>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      firstName: "张",
+      lastName: "三",
+      fullName2: "张-三" 
+    },
+    computed: {
+      fullName1(){
+        return `${this.firstName} - ${this.lastName}`
+      }
+    },
+    watch: {
+      firstName(newValue, oldValue){
+        this.fullName2 = newValue + "-" + this.lastName;
+      },
+      lastName(newValue, oldValue){
+        this.fullName2 = this.firstName + "-" + newValue;
+      },
+    },
+    methods: {},
+  });
+</script>
+</html>

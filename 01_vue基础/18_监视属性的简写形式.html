@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    监视多级结构中某个属性的变化："numbers.a"
+  -->
+  <div id='app'>
+    <h2>今天天气很{{info}}</h2>
+    <button @click="toggle">切换天气</button>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      isHot: true,
+      numbers: {
+        a: 1,
+        b: 1,
+      },
+    },
+    computed: {
+      info(){
+        return this.isHot ? "炎热" : "凉爽"
+      }
+    },
+    watch: {
+      // isHot: {
+      //   immediate: true, // 初始化时调用handler
+      //   deep: true, // 深度监视
+      //   handler(newValue, oldValue){
+      //     console.log(`新值：${newValue}，旧值：${oldValue}`);
+      //     console.log("isHot被修改了");
+      //   },
+      // },
+
+      // 如果不需要其他配置项，可以使用下面的简写形式
+      isHot(newValue, oldValue){
+        console.log(`新值：${newValue}，旧值：${oldValue}`);
+        console.log("isHot被修改了");
+      }
+    },
+    methods: {
+      toggle(){
+        this.isHot = !this.isHot;
+      }
+    },
+  });
+
+  // vm.$watch 的简写形式，这里的第二个参数不能写成箭头函数，会造成this指向到window
+  // vm.$watch("isHot", function(newValue, oldValue){
+  //   console.log(`新值：${newValue}，旧值：${oldValue}`);
+  //   console.log("isHot被修改了");
+  // });
+</script>
+</html>

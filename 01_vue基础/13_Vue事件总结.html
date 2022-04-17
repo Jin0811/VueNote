@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+  <style>
+    .demo{
+      width: 200px;
+      height: 50px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    1、按键修饰符可以连着使用：@click.stop.prevent="showInfo" 先阻止冒泡，再阻止默认行为
+    2、系统修饰键：ctrl、alt、shift、meta的后面可以跟具体的某一个键，代表只有同时按下这两个键才能触发事件
+  -->
+  <div id='app'>
+    <div @click="showInfo" class="demo">
+      <a @click.stop.prevent="showInfo" href="https://www.baidu.com/">a标签</a>
+    </div>
+
+    <div>
+      <span>只有同时按下ctrl+y才能触发事件</span>】
+      <input type="text" @keyup.ctrl.y="showInfo">
+    </div>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {},
+    methods: {
+      showInfo(){
+        alert("提示")
+      }
+    },
+  });
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    事件当中默认传递的是event对象
+    如果需要传递其他参数，可以使用 $event 来传递event
+    其实不传递 $event 在方法当中也可以直接使用event对象，但是建议传递 $event
+
+    data当中的数据会进行数据代理，将数据挂载到vm实例上，methods当中的函数也会被挂载到vm实例上，其实函数写到data当中，也能正常调用，但是这样会有很大的性能问题
+    data当中的数据会进行数据代理和数据劫持，但是方法并不需要，如果方法写在了data当中，就会造成不必要的性能消耗
+  -->
+  <div id='app'>
+    <button v-on:click="showInfo1">按钮1</button>
+    <button v-on:click="showInfo2(1, $event)">按钮2</button>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {},
+    methods: {
+      showInfo1(event){
+        // methods当中的普通函数当中，this指向的是vm对象
+        console.log(event);
+      },
+      showInfo2(){
+        // methods当中的普通函数当中，this指向的是vm对象
+        console.log(event);
+      },
+    },
+  });
+</script>
+</html>

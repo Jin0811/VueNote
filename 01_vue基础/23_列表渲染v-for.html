@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    
+  -->
+  <div id='app'>
+    <h2>1、遍历数组</h2>
+    <ul v-for="(item, index) in personList" ::key="item.id">
+      <li>{{ item.name }} - {{ item.age }}</li>
+    </ul>
+
+    <h2>2、遍历对象</h2>
+    <p v-for="(value, key) of car">
+      {{ key }} - {{ value }}
+    </p>
+
+    <h2>3、遍历字符串</h2>
+    <span v-for="(item, index) in str" ::key="index">{{ item }}</span>
+
+    <h2>4、遍历指定次数</h2>
+    <p v-for="(item, index) in 5" :key="index">{{index}} = {{item}}</p>
+
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      personList: [
+        { id: 1, name: "张三", age: 18 },
+        { id: 2, name: "李四", age: 19 },
+        { id: 3, name: "王五", age: 20 },
+      ],
+      car: {
+        name: "车",
+        price: 20000,
+        color: "黑色"
+      },
+      str: "hello"
+    },
+    methods: {},
+  });
+</script>
+</html>

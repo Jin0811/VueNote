@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    
+  -->
+  <div id='app'>
+    
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  // 创建一个构造函数
+  function Demo(){
+
+  }
+
+  const d = new Demo();
+
+  console.log(Demo.prototype); // 显式原型属性
+  console.log(d.__proto__); // 隐式原型属性
+
+  // 显式原型属性和隐式原型属性都指向了原型对象
+
+  // 通过Demo的显式原型属性，触碰到原型对象，为原型对象添加了一个num属性
+  // 通过显式原型属性操作原型对象
+  Demo.prototype.num = 99;
+
+  // 一般是通过显式原型属性来操作原型对象，然后通过隐式原型属性来读取原型对象上的属性和方法
+
+  console.log(d.__proto__);
+  console.log(d.num);
+  
+</script>
+</html>

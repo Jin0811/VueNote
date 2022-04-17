@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+  <style>
+    [v-cloak]{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    1、v-cloak指令是没有值的
+    2、本质是一个特殊的属性，Vue实例创建完成，并接管容器之后，就会删除v-cloak属性
+    3、使用css配合v-cloak可以解决网速慢时页面展示出 {{}} 的问题
+  -->
+  <div id='app'>
+    <h1 v-cloak>{{ name }}</h1>
+  </div>
+  <script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+</body>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      name: "v-cloak",
+    },
+    methods: {},
+  });
+</script>
+</html>

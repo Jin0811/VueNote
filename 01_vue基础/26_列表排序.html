@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+
+  -->
+  <div id='app'>
+    <input type="text" placeholder="请输入名字" v-model="keyWord">
+    <button @click="type = 0">原顺序</button>
+    <button @click="type = 1">升序</button>
+    <button @click="type = 2">降序</button>
+    <!-- 这里的key最好用id，因为升序和降序都会破坏数据的顺序 -->
+    <ul v-for="(item, index) in filterPersons" :key="item.id">
+      <li>
+        <span>{{ item.name }} - {{ item.age }} -{{ item.sex }}</span>
+      </li>
+    </ul>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      type: 0,
+      keyWord: "",
+      personList: [
+        { id: 1, name: "周冬雨", age: 20, sex: "女" },
+        { id: 2, name: "马冬梅", age: 18, sex: "女" },
+        { id: 3, name: "周杰伦", age: 15, sex: "男" },
+        { id: 4, name: "温兆伦", age: 23, sex: "男" },
+      ],
+    },
+    computed: {
+      filterPersons(){
+        let arr = this.personList.filter((item) => {
+          return item.name.includes(this.keyWord);
+        });
+        if(this.type){
+          arr.sort((x, y) => {
+            return this.type == 1 ? x.age-y.age : y.age-x.age;
+          });
+        }
+        return arr;
+      },
+    },
+    methods: {},
+  });
+</script>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p>姓名：{{name}}</p>
+    <p>地址：<a v-bind:href="url" target="blank">百度</a></p>
+  </div>90
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js"></script>
+<script>
+  new Vue({
+    el: "#app",
+    data: {
+      name: "Jack",
+      url: "http://www.baidu.com",
+    },
+    methods: {},
+  });
+</script>
+</html>

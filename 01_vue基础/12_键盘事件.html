@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    Vue当中常用的按键别名：
+    1、enter：回车
+    2、delete或Backspace：删除
+    3、退出：esc
+    4、空格：space
+    5、换行：tab
+    6、up：上
+    7、down：下
+    8、left：左
+    9、right：右
+
+    vue没有提供的别名，可以通过按键原始的key值去绑定，但是绑定的时候一定要转换为短横线命名，如：CapsLock => caps-lock
+
+    tab键本身具有将焦点从本身转移到其他元素上的特性，所以在搭配keyup事件时，不会触发键盘事情，可以搭配keydown事件
+
+    系统修饰键：ctrl、alt、shift、meta
+    1、配合keyup使用：按下修饰键的同时，再按下其他键，释放掉其他键之后，事件才会被触发
+    2、配合keydown使用：正常触发事件
+
+    可以通过keyCode去指定具体的按键，如：@keyup.13="" 代表着为enter键绑定了键盘事件（不推荐，因为不同键盘之间的keyCode代表的键不一定相同）
+
+    定制按键别名：Vue.config.keyCodes.自定义键名 = 键码
+  -->
+  <div id='app'>
+    <div>
+      <span>CapsLock => caps-lock</span>
+      <input type="text" v-model="value1" @keyup.caps-lock="showInfo">
+    </div>
+
+    <div>
+      <span>Tab键</span>
+      <input type="text" v-model="value2" @keydown.tab="showInfo">
+    </div>
+
+    <div>
+      <span>ctrl</span>
+      <input type="text" v-model="value3" @keyup.ctrl="showInfo">
+    </div>
+
+    <div>
+      <span>keyCode值绑定</span>
+      <input type="text" v-model="value4" @keyup.13="showInfo">
+    </div>
+
+    <div>
+      <span>自定义按键别名</span>
+      <input type="text" v-model="value5" @keyup.myenter="showInfo">
+    </div>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  // 自定义按键别名
+  Vue.config.keyCodes.myenter = 13;
+
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      value1: "",
+      value2: "",
+      value3: "",
+      value4: "",
+      value5: "",
+    },
+    methods: {
+      showInfo(e){
+        console.log(e.key);
+      }
+    },
+  });
+</script>
+</html>

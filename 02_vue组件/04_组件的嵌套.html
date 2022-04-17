@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    
+  -->
+  <div id='app'>
+    <app></app>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.js'></script>
+<script>
+  // 创建hello组件
+  const hello = Vue.extend({
+    template: `<h1>欢迎来学校学习</h1>`,
+    data(){
+      return {}
+    }
+  });
+
+  // 创建student组件
+  const student = Vue.extend({
+    template: `
+      <div>
+        <p>学生姓名：{{ studentName }}</p>
+        <p>学生年龄：{{ age }}</p>
+      </div>
+    `,
+    data(){
+      return {
+        studentName: "张三",
+        age: 18,
+      }
+    }
+  });
+
+  // 创建school组件
+  const school = Vue.extend({
+    name: "schoolComponent", // 指定组件在开发者工具当中呈现的名字
+    components: {
+      student
+    },
+    template: `
+      <div>
+        <p>学校名称：{{ schoolName }}</p>
+        <p>学校地址：{{ address }}</p>
+        <student></student>
+      </div>
+    `,
+    data(){
+      return {
+        schoolName: "XXX小学",
+        address: "XXX路",
+      }
+    }
+  });
+
+  // 创建app组件
+  const app = Vue.extend({
+    components: {
+      hello,
+      school
+    },
+    template: `
+      <div>
+        <hello></hello>
+        <school></school>
+      </div>
+    `,
+    data(){
+      return {}
+    }
+  });
+
+  const vm = new Vue({
+    el: '#app',
+    components: {
+      app,
+    },
+    data: {},
+    methods: {},
+  });
+</script>
+</html>

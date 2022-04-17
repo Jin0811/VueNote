@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    Vue.set(要添加属性的对象, 属性名称, 属性值);
+    
+    Vue.set() 只能给data当中的某一个对象响应式地添加属性，但是不允许为data添加属性
+  -->
+  <div id='app'>
+    <p>姓名：{{ student.name }}</p>
+    <p>性别：{{ student.sex }}</p>
+    <p>地址：{{ student.address }}</p>
+    <p>年龄：{{ student.age.sAge }}</p>
+    <p>校长：{{ school.leader }}</p>
+
+    <hr>
+    <p v-for="(item, index) in student.friends" :key="index">{{ item.name }} - {{ item.age }}</p>
+
+    <button @click="add">添加性别属性</button>
+
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      student: {
+        name: "张三",
+        address: "XXX街道",
+        age: {
+          rAge: 40,
+          sAge: 18,
+        },
+        friends: [
+          { name: "李四", age: 20 },
+          { name: "王五", age: 20 },
+        ]
+      },
+      school: {}
+    },
+    methods: {
+      add(){
+        // vm.$set(this.student, "sex", "男");
+        // this.$set(this.student, "sex", "男");
+        Vue.set(this.student, "sex", "男");
+      }
+    },
+  });
+</script>
+</html>

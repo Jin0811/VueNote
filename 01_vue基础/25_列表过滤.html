@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    最优方式是计算属性
+    计算属性调用时机：
+      1、初次被读取时
+      2、所依赖的数据发生变化时
+
+    注意：
+      1、字符串includes空字符串会返回true 如："abc".includes("") == true
+      2、字符串indexOf空字符串也会返回true 如："abc".indexOf("") == true
+  -->
+  <div id='app'>
+    <h2>watch方式实现</h2>
+    <input type="text" placeholder="请输入名字" v-model="keyWord1">
+    <ul v-for="(item, index) in filterPersons1" :key="index">
+      <li>
+        <span>{{ item.name }} - {{ item.age }} -{{ item.sex }}</span>
+      </li>
+    </ul>
+
+    <h2>computed方式实现</h2>
+    <input type="text" placeholder="请输入名字" v-model="keyWord2">
+    <ul v-for="(item, index) in filterPersons2" :key="index">
+      <li>
+        <span>{{ item.name }} - {{ item.age }} -{{ item.sex }}</span>
+      </li>
+    </ul>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      keyWord1: "",
+      personList1: [
+        { id: 1, name: "周冬雨", age: 20, sex: "女" },
+        { id: 2, name: "马冬梅", age: 21, sex: "女" },
+        { id: 3, name: "周杰伦", age: 22, sex: "男" },
+        { id: 4, name: "温兆伦", age: 23, sex: "男" },
+      ],
+      filterPersons1: [],
+
+      keyWord2: "",
+      personList2: [
+        { id: 1, name: "周冬雨", age: 20, sex: "女" },
+        { id: 2, name: "马冬梅", age: 21, sex: "女" },
+        { id: 3, name: "周杰伦", age: 22, sex: "男" },
+        { id: 4, name: "温兆伦", age: 23, sex: "男" },
+      ],
+    },
+    watch: {
+      keyWord1: {
+        handler(newVal){
+          // 字符串includes空字符串会返回true
+          this.filterPersons1 = this.personList1.filter((item) => {
+            return item.name.includes(newVal);
+          });
+        },
+        immediate: true, // 第一次时就调用
+      }
+    },
+    computed: {
+      filterPersons2(){
+        return this.personList2.filter((item) => {
+          return item.name.includes(this.keyWord2);
+        });
+      }
+    },
+    methods: {},
+  });
+</script>
+</html>

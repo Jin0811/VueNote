@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    console.log(data.name);
+    当读取name属性时，会先调用get，但是get当中return了data.name，又读取了name属性，接着调用get，会造成死循环，内存溢出
+    
+    data.name = "李四";
+    当修改name属性时，会先调用set，但是set当中对name属性进行了赋值，也会调用set，这样也造成了死循环，内存溢出
+
+    Object.defineProperty(data, "name", {
+      get(){
+        return data.name
+      },
+      set(val){
+        data.name = val;
+      }
+    });
+  -->
+  <div id='app'>
+    
+  </div>
+</body>
+<script>
+  let data = {
+    name: "张三",
+    address: "XXX街道"
+  };
+
+  // 创建一个监视的实例对象，用于监视data中属性的变化
+  const obs = new Observer(data);
+  console.log(obs);
+
+  // 准备一个vm实例对象
+  let vm = {};
+  vm._data = data = obs;
+
+  function Observer(obj){
+    const keys = Object.keys(obj);
+    keys.forEach((k) => {
+      Object.defineProperty(this, k, {
+        get(){
+          return obj[k]
+        },
+        set(val){
+          console.log("调用了set");
+          obj[k] = val;
+        }
+      });
+    });
+  }
+
+</script>
+</html>

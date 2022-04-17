@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- 针对IE浏览器的一个特殊配置，含义是让IE浏览器以最高的渲染级别来渲染页面 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- 开启移动端的理想视口 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+    <!--
+      配置页签的图标
+      Vue的项目在部署之后，可能会出现奇奇怪怪的路径问题，这里VueCli设计了一个变量：<%= BASE_URL %>
+      这个变量代表的就是public文件夹，在index.html文件当中引入文件时，建议使用这个变量，而不是通过 ./ 的方式
+    -->
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    
+    <!--
+      配置网页的标题
+      webpack的插件会自动读取package.json当中的name属性，作为网页的标题
+    -->
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+
+  <body>
+    <!-- 当浏览器不支持JS时，noscript当中的标签就会显示 -->
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

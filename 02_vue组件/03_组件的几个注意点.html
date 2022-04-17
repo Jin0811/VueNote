@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    1、组件名称尽可能回避HTML当中已有元素名称，例如H1、H2等
+    2、可以使用name配置项指定组件在开发者工具当中呈现的名字
+    3、脚手架当中也可以使用一个自闭合标签来使用组件 <MySchool />
+    4、组件定义的简写形式：const school = Vue.extend(options); 可以简写为 const school = options;
+  -->
+  <div id='app'>
+    <!-- 组件名称为一个单词 -->
+    <school></school>
+
+    <!-- 组件为两个单词，单词之间用 - 连接 -->
+    <my-school></my-school>
+
+    <!-- 组件为两个单词，组件名称用大驼峰（这种方法仅限于脚手架当中使用） -->
+    <!-- <MySchool></MySchool> -->
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.js'></script>
+<script>
+  // 创建school组件
+  const school = Vue.extend({
+    name: "schoolComponent", // 指定组件在开发者工具当中呈现的名字
+    template: `
+      <div>
+        <p>{{ schoolName }}</p>
+        <p>{{ address }}</p>
+      </div>
+    `,
+    data(){
+      return {
+        schoolName: "XXX小学",
+        address: "XXX路",
+      }
+    }
+  });
+
+  const vm = new Vue({
+    el: '#app',
+    components: {
+      school: school,
+      'my-school': school,
+      MySchool: school,
+    },
+    data: {},
+    methods: {},
+  });
+</script>
+</html>

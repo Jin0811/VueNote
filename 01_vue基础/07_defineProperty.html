@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    数据代理：Object.defineProperty
+
+    Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象
+    Object.defineProperty(obj, prop, descriptor)
+      obj：要定义属性的对象
+      prop：要定义或修改的属性的名称
+      descriptor：要定义或修改的属性描述符
+        value：属性的值
+        enumerable：控制属性是否可以被枚举，默认为false，不能被枚举
+        writable：控制属性是否可以被修改，默认false，不能被修改
+        configurable：控制属性是否被删除，默认false，不能被删除
+        get: function(){} 属性的 getter 函数，当访问该属性时，会调用此函数
+        set: function(){} 属性的 setter 函数，当属性值被修改时，会调用此函数
+
+    通过Object.defineProperty添加或修改的属性，默认是不可以被枚举的，使用 for in 和 Object.keys 都无法输出该属性
+    但是可以通过配置项当中的enumerable属性来控制属性是否可以被枚举
+
+    注意：descriptor当中不能同时存在writable和get/set
+  -->
+  <div id='app'></div>
+</body>
+<script>
+  let num = 18;
+  let person ={
+    name: "张三",
+    sex: "男",
+  };
+
+  Object.defineProperty(person, "age", {
+    // value: 18, // 属性的值
+    // enumerable: true, // 控制属性是否可以被枚举，默认为false，不能被枚举
+    // writable: true, // 控制属性是否可以被修改，默认false，不能被修改
+    // configurable: true, // 控制属性是否被删除，默认false，不能被删除
+
+    // 当有人读取person的age属性时，get函数就会被调用，且返回值就是age的值
+    get(){
+      return num;
+    },
+    // 当属性值被修改时，会调用此函数，参数为修改的值
+    set(value){
+      num = value;
+    },
+  });
+
+  console.log(person);
+  console.log(Object.keys(person));
+</script>
+</html>

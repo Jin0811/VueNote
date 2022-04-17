@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+  <style>
+    .demo{
+      width: 200px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #ccc;
+    }
+    .bg1{
+      background: #2ecc71;
+    }
+    .bg2{
+      background: #e74c3c;
+    }
+    .bg3{
+      background: #2c3e50;
+    }
+
+    .borderRed{
+      border: 1px solid red;
+    }
+    .colorOrange{
+      color: #e67e22;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    绑定class
+    1、字符串写法：v-bind:class="classVariable" classVariable为data当中定义的一个变量，变量对应是值是CSS当中的一个样式类
+    2、数组写法：v-bind:class="classArr" classArr当中是一个个类名
+    3、对象写法：v-bind:class="classObj" classObj当中，键名为类名，值为true时绑定样式，为false时不绑定样式
+  -->
+  <div id='app'>
+    <div class="demo" v-bind:class="classVariable" @click="changeFun">
+      <button>{{ name }}</button>
+    </div>
+
+    <br><br>
+    <div class="demo" :class="classArr">
+      绑定class数组
+    </div>
+
+    <br><br>
+    <div class="demo" :class="classObj">
+      绑定classObj
+    </div>
+
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      name: "class样式绑定",
+      classVariable: "demo1",
+      classArr: ["borderRed", "colorOrange"],
+      classObj: {
+        borderRed: false, // true代表应用，false代表不应用
+        colorOrange: true,
+      },
+    },
+    methods: {
+      changeFun(){
+        const arr = ["bg1", "bg2", "bg3"];
+        const index = Math.floor(Math.random()*3);
+        this.classVariable = arr[index];
+      },
+    },
+  });
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    v-show：
+      节点存在，只是切换display的属性来完成显示和隐藏
+      如果显示和隐藏切换频率很高，建议使用v-show，频率低建议使用v-if
+    
+    v-if：
+      节点不会进行渲染，页面当中不会有这个dom元素
+  -->
+  <div id='app'>
+    <div v-show="showInfo">v-show:{{ info }}</div>
+    <div v-if="showInfo">v-if:{{ info }}</div>
+
+
+    <div v-if="num == 1">1</div>
+    <div v-else-if="num == 2">2</div>
+    <div v-else>3</div>
+    
+    <!-- templete只能与v-if配合，不能与v-show配合 -->
+    <template v-if="num==1">
+      <h1>1</h1>
+      <h1>2</h1>
+      <h1>3</h1>
+    </template>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      info: "vue条件渲染",
+      showInfo: false,
+      num: 1,
+    },
+    methods: {},
+  });
+</script>
+</html>

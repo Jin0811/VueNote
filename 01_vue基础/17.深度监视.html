@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    监视多级结构中某个属性的变化："numbers.a"
+  -->
+  <div id='app'>
+    <h2>今天天气很{{info}}</h2>
+    <button @click="toggle">切换天气</button>
+
+    <hr>
+    <p>numbers.a = {{ numbers.a }}</p>
+    <button @click="numbers.a++">a ++</button>
+    <br><br>
+    <p>numbers.b = {{ numbers.b }}</p>
+    <button @click="numbers.b++">b ++</button>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      isHot: true,
+      numbers: {
+        a: 1,
+        b: 1,
+      },
+    },
+    computed: {
+      info(){
+        return this.isHot ? "炎热" : "凉爽"
+      }
+    },
+    watch: {
+      isHot: {
+        handler(newValue, oldValue){
+          console.log(`新值：${newValue}，旧值：${oldValue}`);
+          console.log("isHot被修改了");
+        },
+      },
+
+      // 单独监视numbers的a属性
+      // "numbers.a": {
+      //   handler(newValue, oldValue){
+      //     console.log(`numbers.a被修改了-${this.numbers.a}`);
+      //   },
+      // },
+
+      // 监视numbers当中的所有属性的变化
+      numbers: {
+        // 开启深度监视，未开启之前只能监视numbers整个对象，开启之后可以监视numbers内部全部属性的变化
+        deep: true,
+        handler(newValue, oldValue){
+          console.log(`number当中有属性改变了`);
+        }
+      }
+    },
+    methods: {
+      toggle(){
+        this.isHot = !this.isHot;
+      }
+    },
+  });
+</script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    v-text
+    1、作用是向其所在的节点中渲染文本内容
+    2、与插值语法的区别：v-text会替换掉节点中的内容，插值语法不会
+  -->
+  <div id='app'>
+    <div>{{ msg }}</div>
+    <div v-text="msg">
+      <a href="">111</a>
+    </div>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      msg: "v-text指令使用"
+    },
+    methods: {},
+  });
+</script>
+</html>

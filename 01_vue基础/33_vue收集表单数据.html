@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    v-model修饰符
+    1 v-model.number 控制只能输入数字
+    2 v-model.lazy 失去焦点再收集依赖
+    3 v-model.trim 去除首尾的空格
+
+    1、<input type="text"> v-model收集的是value值，用户输入的也是value值
+    2、<input type="radio" name="sex" value="man"> v-model收集的是value值，需要给标签配置value值
+    3、<input type="checkbox" value="study" name="hobby">
+      1、如果没有配置input的value属性，那么收集的就是checked，勾选为true，不勾选为false
+      2、配置了input的value属性：
+        2.1 v-model的初始值是非数组，那么收集的就是checked
+        2.2 v-model的初始值为数组，那么收集的就是value值组成的数组
+  -->
+  <div id='app'>
+    <form @submit.prevent="submit">
+      账号：<input type="text" v-model="account"> <br><br>
+      密码：<input type="password" v-model="password"> <br><br>
+      年龄：<input type="number" v-model.number="age"> <br><br>
+      性别：
+        <input type="radio" v-model="sex" name="sex" value="man">男
+        <input type="radio" v-model="sex" name="sex" value="woman">女
+        <br><br>
+      爱好：
+        <input type="checkbox" v-model="hobby" value="study" name="hobby">学习
+        <input type="checkbox" v-model="hobby" value="game" name="hobby">打游戏
+        <input type="checkbox" v-model="hobby" value="eat" name="hobby">吃饭
+        <br><br>
+      所属校区：
+      <select v-model="city">
+        <option value="">请选择校区</option>
+        <option value="beijing">北京</option>
+        <option value="shanghai">上海</option>
+        <option value="wuhan">武汉</option>
+      </select>
+      <br><br>
+      其他信息：
+      <textarea v-model.lazy="other"></textarea>
+      <br><br>
+      <input type="checkbox" v-model="agree">阅读并接受<a href="#">《用户协议》</a>
+      <button>提交</button>
+    </form>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      account: "",
+      password: "",
+      age: "",
+      sex: "man",
+      hobby: [],
+      city: "",
+      other: "",
+      agree: false,
+    },
+    methods: {
+      submit(){},
+    },
+  });
+</script>
+</html>

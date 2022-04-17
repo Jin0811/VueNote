@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+  <style>
+    .demo{
+      width: 100%;
+      height: 100px;
+      border: 1px solid #ccc;
+      margin: 10px 0;
+    }
+    .box{
+      width: 200px;
+      height: 50px;
+      background-color: burlywood;
+    }
+    .list{
+      width: 200px;
+      height: 200px;
+      overflow: auto;
+    }
+    .list > li{
+      width: 100%;
+      height: 100px;
+      margin-bottom: 10px;
+      background: peru;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    js当中阻止默认事件可以使用 event.preventDefault()
+    在vue当中，提供了 .prevent 事件修饰符来完成该功能，用法：v-on:click.prevent 
+
+    1、prevent：阻止默认事件
+    2、stop：阻止事件冒泡
+    3、once：事件只触发一次
+    4、capture：使用事件的捕获模式
+    5、self：只有event.target是当前操作的元素时才触发事件
+    6、passive：事件的默认行为立即执行，无需等待事件回调执行完成，passive不能与prevent一起使用
+  -->
+  <div id='app'>
+    <!-- 阻止默认事件 -->
+    <div class="demo">
+      <p>阻止默认事件</p>
+      <a href="https://www.baidu.com/" target="blank" v-on:click.prevent="showInfo">点击</a>
+    </div>
+
+    <!--
+      阻止事件冒泡
+      利用stop修饰符，来阻止button上的点击事件冒泡到div上
+    -->
+    <div class="demo" @click="showInfo">
+      <p>冒泡</p>
+      <button @click.stop="showInfo">冒泡</button>
+    </div>
+
+    <div class="demo">
+      <p>事件只执行一次</p>
+      <button @click.once="showInfo">执行一次</button>
+    </div>
+
+    <!--
+      使用事件的捕获模式
+      js默认是在冒泡阶段进行事件的处理，使用capture修饰符可以设置为在捕获阶段处理事件
+      捕获是从外层到内层：demo > box
+      冒泡是从内层到外层：box > demo
+    -->
+    <div class="demo" @click.capture="showMsg(1)">
+      demo
+      <div class="box" @click="showMsg(2)">box</div>
+    </div>
+
+    <!--
+      只有event.target是当前操作的元素时才触发事件
+      点击button时，点击事件会冒泡到div上面，当给div添加了 .self 事件修饰符后，只有 event.target 是div自身时，才会调用div上面的showInfo方法
+      点击button时，event.target是button，并不是div，这样就只会触发button的点击事件，触发了div的事件，也不会调用方法
+      虽然事件冒泡到了div，但是由于有self修饰符，event.target不是div，也就没有调用showInfo方法
+    -->
+    <div class="demo" @click.self="showInfo">
+      <p>只有event.target是当前操作的元素时才触发事件</p>
+      <button @click="showInfo">只有event.target是当前操作的元素时才触发事件</button>
+    </div>
+
+    <!--
+      事件的默认行为立即执行，无需等待事件回调执行完成
+      鼠标滚轮滚动时，会调用scrollDemo方法，但是scrollDemo方法当中有一个很长事件的循环，只有走完了，再会使页面滚动，这样就会造成一种卡顿的感觉
+      使用passive修饰符可以先滚动，再进行方法里面的循环
+    -->
+    <ul @wheel.passive="scrollDemo" class="list">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+    </ul>
+
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {},
+    methods: {
+      showInfo(event){
+        // event.preventDefault(); // 阻止默认事件
+        alert("点击a标签");
+      },
+      showMsg(msg){
+        console.log(msg);
+      },
+      // 鼠标滚轮滚动事件
+      scrollDemo(){
+        for(let i=0; i<10000; i++){
+          console.log(i)
+        }
+      }
+    },
+  });
+</script>
+</html>

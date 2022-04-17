@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    直接通过索引值来修改数组的某一项，数据可以改变，但是页面不会更新，vue检测不到
+    只有通过 push、pop、shift、unshift、splice、sort、reverse 这个几个方法来修改数组，vue才能检测到
+
+    Vue通过重写（包装）数组的部分方法来实现对数组的检测
+  -->
+  <div id='app'>
+    <button @click="test">通过Vue.set修改数据</button>
+    <p v-for="(item, index) in arr" :key="item.id">{{ item }}</p>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      arr: [
+        "张三",
+        "李四",
+        "王五",
+        "赵六",
+      ]
+    },
+    methods: {
+      test(){
+        // 可以使用Vue.set来根据索引去修改数组的数据
+        // 这种方法不常用
+        Vue.set(this.arr, 0, "张三修改了");
+      }
+    },
+  });
+</script>
+</html>

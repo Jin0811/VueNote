@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    如果要给data当中的一个对象进行赋值，则必须要使用$set，否则页面不会更新
+  -->
+  <div id='app'>
+    <button @click="updateMei">更新马冬梅的信息</button>
+    <ul v-for="(item, index) in personList" :key="item.id">
+      <li>
+        <span>{{ item.name }} - {{ item.age }} -{{ item.sex }}</span>
+      </li>
+    </ul>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      personList: [
+        { id: 1, name: "周冬雨", age: 20, sex: "女" },
+        { id: 2, name: "马冬梅", age: 18, sex: "女" },
+        { id: 3, name: "周杰伦", age: 15, sex: "男" },
+        { id: 4, name: "温兆伦", age: 23, sex: "男" },
+      ],
+    },
+    methods: {
+      updateMei(){
+        // this.personList[0].name = "马老师"; // 这种方式可以实现修改
+        this.personList[0] = { id: 1, name: "马老师", age: 20, sex: "女" }; // 这种方式vue不会检测到数据变化
+      },
+    },
+  });
+</script>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    v-pre指令
+    1、v-pre指令可以跳过其所在节点的编译过程
+    2、可以利用v-pre跳过没有使用指令语法、插值语法的节点，可以加快编译速度
+  -->
+  <div id='app'>
+    <h2 v-pre>Vue学习</h2>
+    <h3 v-pre>{{ name }}</h3>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      name: "张三",
+    },
+    methods: {},
+  });
+</script>
+</html>

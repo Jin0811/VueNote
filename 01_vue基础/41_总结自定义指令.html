@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    1、如果指令名称当中有多个单词，则使用时需要使用-连接
+    2、指令当中的函数，this都指向window
+    3、使用 directives:{} 创建的指令是局部指令，可以使用 Vue.directive 来创建全局指令
+  -->
+  <div id='app'>
+    <h2>当前的n值是：<span v-text="n"></span></h2>
+    <h2>放大10倍后的n值是：<span v-big-number="n"></span></h2>
+    <span v-big="n"></span>
+    <input type="text" v-focus="n">
+    <button @click="n++">n+1</button>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  // 全局指令
+  Vue.directive("focus", {
+    // 初始时，指令与元素成功绑定
+    bind(element, binding){
+      console.log("bind");
+      element.value = binding.value;
+    },
+    // 指令所在元素被插入页面时
+    inserted(element, binding){
+      console.log("inserted");
+      element.focus();
+    },
+    // 指令所在的模板被重新解析时
+    update(element, binding){
+      console.log("update");
+      element.value = binding.value;
+    },
+  });
+  Vue.directive("big", function(element, binding){
+    element.innerText = binding.value * 10;
+  });
+
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      n: 1
+    },
+    directives: {
+      // element为当前DOM元素，binding为绑定对象
+      "big-number": function(element, binding){
+        element.innerText = binding.value * 10;
+
+        console.log(this); // 这里的this，指向到window
+      },
+    },
+    methods: {},
+  });
+</script>
+</html>

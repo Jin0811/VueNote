@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    1、过滤器可以进行串联，后面的过滤器接受到的值是前一个过滤器的返回值
+    2、过滤器不会改变原有的数据，而是产生一个新的数据
+  -->
+  <div id='app'>
+    <h2>显示格式化后的时间</h2>
+    <h3>{{ time }}</h3>
+    <h3>计算属性实现：{{ fmtTime }}</h3>
+    <h3>method实现：{{ formatTime(time) }}</h3>
+    <h3>过滤器实现：{{ time | timeFormatFilter }}</h3>
+    <h3>过滤器实现：{{ time | timeFormatFilter('YYYY-MM-DD') | sliceFilter }}</h3>
+
+    <p :title="msg | sliceFilter">在属性当中使用过滤器</p>
+  </div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.6/dayjs.min.js"></script>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  // 全局过滤器，必须要在实例创建之前定义
+  Vue.filter("sliceFilter", function(value){
+    return value.slice(0,4)
+  });
+
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      time: Date.now(),
+      msg: "你好，vue",
+    },
+    // 局部过滤器
+    filters: {
+      timeFormatFilter(value, formatStr='YYYY-MM-DD HH:mm:ss'){
+        return dayjs(value).format(formatStr);
+      },
+    },
+    computed:{
+      fmtTime(){
+        return dayjs(this.time).format("YYYY-MM-DD HH:mm:ss");
+      }
+    },
+    methods: {
+      formatTime(time){
+        return dayjs(this.time).format("YYYY-MM-DD HH:mm:ss");
+      }
+    },
+  });
+</script>
+</html>

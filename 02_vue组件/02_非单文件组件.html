@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    1、组件当中的data必须写成函数，这样是为了避免组件被复用时，数据存在引用关系
+  -->
+  <div id='app'>
+    <hello></hello>
+    <hr>
+    <school></school>
+    <hr>
+    <student></student>
+  </div>
+</body>
+<script src='https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.min.js'></script>
+<script>
+  // 创建school组件
+  const school = Vue.extend({
+    template: `
+      <div>
+        <p>{{ schoolName }}</p>
+        <p>{{ address }}</p>
+      </div>
+    `,
+    data(){
+      return {
+        schoolName: "XXX小学",
+        address: "XXX路",
+      }
+    }
+  });
+
+  // 创建student组件
+  const student = Vue.extend({
+    template: `
+      <div>
+        <p>{{ studentName }}</p>
+        <p>{{ age }}</p>
+      </div>
+    `,
+    data(){
+      return {
+        studentName: "张三",
+        age: 18,
+      }
+    }
+  });
+
+  // 创建hello组件（全局组件）
+  const hello = Vue.extend({
+    template: `<p>你好</p>`,
+  });
+  Vue.component("hello", hello); // 全局注册组件
+
+  // VM实例
+  const vm = new Vue({
+    el: '#app',
+    // 注册组件（局部注册）
+    components: {
+      school: school,
+      student: student,
+    },
+    data: {},
+    methods: {},
+  });
+</script>
+</html>
