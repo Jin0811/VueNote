@@ -1,2 +1,2 @@
 # Vue-Note
-Vue学习笔记
+Vue学习笔记，包含Vue2和Vue3

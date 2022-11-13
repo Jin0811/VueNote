@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  
+  // Vue2的响应式
+  let person1 = { name: "张三" }; // 源对象
+  let p1 = {};
+  Object.defineProperty(p1, "name", {
+    configurable: true,
+    get(){
+      return person.name;
+    },
+    set(value){
+      person.name = value;
+    }
+  });
+  // console.log(p1.name);
+
+
+  /**
+   * Vu3响应式
+   * target：源对象
+   * propName：属性名称
+   * value：修改的值
+   * 
+   * 通过Proxy（代理）拦截对象中任意属性的变化，包括属性值的读写、添加、删除
+   * 通过Reflect（反射）对被源对象属性进行操作
+   * 
+   * 操作对象我们可以使用最简单的方式来进行操作，但是vue3当中使用了Reflect来进行属性的操作
+   * 原因是Reflect可以返回操作是否成功，可以提高框架的健壮性
+   */
+  let person2 = { name: "张三", age: 18 }; // 源对象
+  const p2 = new Proxy(person2, {
+    get(target, propName){
+      // 读取属性
+      // return target[propName];
+      return Reflect.get(target, propName);
+    },
+    set(target, propName, value){
+      // 修改属性、添加属性
+      // target[propName] = value;
+      Reflect.set(target, propName, value);
+    },
+    deleteProperty(target, propName){
+      // 删除属性
+      // return delete target[propName];
+      return Reflect.deleteProperty(target, propName);
+    },
+  });
+
+</script>
+</html>
