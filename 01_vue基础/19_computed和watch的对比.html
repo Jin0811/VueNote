@@ -8,7 +8,12 @@
 </head>
 <body>
   <!--
-    watch当中可以开启异步任务，但是computed当中不能开启
+    1、watch当中可以开启异步任务，但是computed当中不能开启
+    2、computed初始就会进行计算，watch默认第一次不进行监听，但是可以配置 immediate 来开始第一次就进行监听
+    3、如果一个属性，依赖于多个属性计算而来，多对一，则使用computed；如果一个数据发生变化会影响多个数据，一对多，则使用watch
+    4、computed支持缓存，watch不支持缓存
+      - computed只有依赖的数据发生变化，才会重新进行计算
+      - watch监听的数据发生变化，就会进行触发函数，其内部使用到的数据，发生变化，不会触发watch
   -->
   <div id='app'>
     <div>

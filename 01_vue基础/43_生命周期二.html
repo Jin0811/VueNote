@@ -8,10 +8,11 @@
 </head>
 <body>
   <!--
-    1、销毁之后，自定义事件会失效，但是原生DOM事件依然有效
+    Vue生命周期分为四个阶段，创建、挂载、更新、卸载，对应了8个生命周期函数
+    当我们使用了keepAlive组件时，被包裹的组件会多出两个生命周期函数，分别为：activated和deactivated，激活和失活
   -->
   <div id='app'>
-    <h2>当前的n的值是{{ n }}</h2>
+    <h2>当前的num的值是{{ num }}</h2>
     <button @click="add">N++</button>
     <button @click="destroy">销毁VM</button>
   </div>
@@ -21,22 +22,22 @@
   const vm = new Vue({
     el: '#app',
     data: {
-      n: 1
+      num: 1
     },
-    // 初始化生命周期和事件，此时还未进行数据代理，可以拿到this（当前组件实例），但是拿不到data当中的数据，即this[data当的数据键]，拿不到
+    // 初始化生命周期和事件，此时还未进行数据代理，可以拿到this（当前组件实例），但是拿不到data当中的数据，即this[data当中的数据键]，拿不到
     beforeCreate(){
       console.log("beforeCreate");
     },
 
-    // 初始化数据检测和数据代理，可以通过vm访问到data当中的数据、methods当中的方法
+    // 初始化数据检测和数据代理，可以通过this访问到data当中的数据、methods当中的方法
     created(){
-      console.log("created");
+      console.log(`created data中num的值为：${this.num}`);
     },
 
     // vue解析模板，在内存当中生成虚拟DOM，页面当中还不能显示解析好的内容
 
     // 此时页面当时显示的是未经vue编译的DOM结构
-    // 这里对DOM的操作，最终都不会生效，因为接下来会将虚拟DOM插入到页面当中，这里的DOM操作就会被覆盖
+    // 这里对DOM的操作，最终都不会生效，因为接下来会将虚拟DOM生成的真实Dom插入到页面当中，这里的DOM操作就会被覆盖
     beforeMount(){
       console.log("beforeMount");
     },
@@ -71,11 +72,13 @@
     // 销毁子组件、watcher等
 
     // 销毁完毕
-    destroyed(){},
+    destroyed(){
+      console.log("destroyed");
+    },
 
     methods: {
       add(){
-        this.n++;
+        this.num++;
       },
       destroy(){
         this.$destroy();

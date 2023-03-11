@@ -8,7 +8,13 @@
 </head>
 <body>
   <!--
-    
+    vue当中不推荐v-for和v-if放到一起去使用
+
+    vue2中v-for的优先级高于v-if 
+    所以是先执行v-for 再执行v-if  （先v-for渲染出来的后又被v-if删除掉了，这样就会造成性能浪费）
+
+    vue3中 v-if 的优先级高于 v-for 
+    所以是先执行v-if 再执行v-for  （如果dom元素不显示的话，就不会走该元素的v-for步骤，不会渲染）
   -->
   <div id='app'>
     <h2>1、遍历数组</h2>

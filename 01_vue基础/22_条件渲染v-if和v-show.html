@@ -14,6 +14,9 @@
     
     v-if：
       节点不会进行渲染，页面当中不会有这个dom元素
+
+    v-show初始化渲染消耗的性能多，但是切换消耗的性能少
+    v-if初始化渲染消耗的性能少，但是切换消耗的性能多
   -->
   <div id='app'>
     <div v-show="showInfo">v-show:{{ info }}</div>
