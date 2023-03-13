@@ -8,7 +8,7 @@
  * 1、Vue.js和vue.runtime.js的区别
  *    1.1 vue.js是完整版的，包含核心和模板解析器
  *    1.2 vue.runtime.js是运行版的vue，只包含核心功能，没有版本解析器
- * 2、因为vue.runtime.js没有模板解析000000000000器，所以不能使用template配置，需要使用render函数接受到的createElement函数去指定具体的内容
+ * 2、因为vue.runtime.js没有模板解析器，所以不能使用template配置，需要使用render函数接受到的createElement函数去指定具体的内容
  */
 
 import Vue from 'vue' // 引入vue
