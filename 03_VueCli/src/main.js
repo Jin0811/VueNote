@@ -4,12 +4,12 @@ import './plugins/element.js'
 
 Vue.config.productionTip = false // 关闭vue的生产提示
 
-// 导入并应用路由
-import router from "./router/index";
-import VueRouter from 'vue-router';
-Vue.use(VueRouter);
+// 公共样式
+import "@/assets/common.less";
 
 new Vue({
   render: h => h(App),
-  router: router, // 配置路由
+  beforeCreate(){
+    Vue.prototype.$bus = this; // 安装全局事件总线
+  },
 }).$mount('#app')

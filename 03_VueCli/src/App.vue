@@ -1,81 +1,54 @@
 <template>
-  <div id="app">
-    <div class="container">
-      <Banner></Banner>
-      <div class="main-body">
-        <div class="menu">
-          <router-link to="/home" active-class="active">Home</router-link>
-          <router-link replace :to="{ name: 'About' }" active-class="active">About</router-link>
-        </div>
-        <div class="content">
-          <router-view></router-view>
-        </div>
-      </div>
-    </div>
+  <div class="container">
+    <FatherOne />
+    <br>
+    <FatherTwo />
+    <br>
+    <FatherThree />
+    <br>
+    <FatherFour />
+    <br>
+    <!-- <FatherFive />
+    <br>
+    <FatherSix />
+    <br>
+    <FatherSeven /> -->
   </div>
 </template>
 
 <script>
-import Banner from "@/components/Banner";
+// 1 props / $emit 适用父子组件通信
+import FatherOne from './pages/propsAndEmit/Father.vue';
+// 2 ref 与 $parent / $children 适用父子组件通信
+import FatherTwo from './pages/refAndParentAndChildren/Father.vue';
+// 3 EventBus （$emit / $on） 适用于父子、隔代、兄弟组件通信
+import FatherThree from './pages/eventBus/Father.vue';
+// 4 自定义事件 （$emit / $on）适用于父子组件通信
+import FatherFour from './pages/selfEvent/Father.vue';
+// 5 $attrs/$listeners 适用于 隔代组件通信
+// import FatherFive from './pages/selfEvent/Father.vue';
+// 6 provide / inject 适用于 隔代组件通信
+// import FatherSix from './pages/selfEvent/Father.vue';
+// 7 vuex
+// import FatherSeven from './pages/selfEvent/Father.vue';
 export default {
   name: "app",
   components: {
-    Banner
-  },
-  data(){
-    return {}
+    FatherOne,
+    FatherTwo,
+    FatherThree,
+    FatherFour,
+    // FatherFive,
+    // FatherSix,
+    // FatherSeven,
   },
 };
 </script>
 
 <style lang="less">
-  *{
+   *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  body{
-    width: 100vw;
-    height: 100vh;
-  }
-  #app{
-    width: 100%;
-    height: 100%;
-  }
-  .container{
-    width: 90%;
-    height: 100%;
-    margin: 0 auto;
-    h1{
-      padding: 15px 0;
-      border-bottom: 1px solid #ccc;
-    }
-    .main-body{
-      display: flex;
-      height: calc(100% - 120px);
-      margin-top: 10px;
-      .menu{
-        width: 200px;
-        height: 100%;
-        border-right: 1px solid #ccc;
-        display: flex;
-        flex-direction: column;
-        padding-right: 10px;
-        a{
-          padding: 10px;
-          font-size: 20px;
-          border-radius: 4px;
-          color: #000;
-        }
-        .active{
-          background-color: #f1f1f1;
-          color: #409EFF;
-        }
-      }
-      .content{
-        flex: 1;
-        padding: 10px;
-      }
-    }
   }
 </style>
