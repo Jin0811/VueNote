@@ -8,11 +8,11 @@
     <br>
     <FatherFour />
     <br>
-    <!-- <FatherFive />
+    <FatherFive />
     <br>
     <FatherSix />
     <br>
-    <FatherSeven /> -->
+    <FatherSeven />
   </div>
 </template>
 
@@ -25,12 +25,12 @@ import FatherTwo from './pages/refAndParentAndChildren/Father.vue';
 import FatherThree from './pages/eventBus/Father.vue';
 // 4 自定义事件 （$emit / $on）适用于父子组件通信
 import FatherFour from './pages/selfEvent/Father.vue';
-// 5 $attrs/$listeners 适用于 隔代组件通信
-// import FatherFive from './pages/selfEvent/Father.vue';
-// 6 provide / inject 适用于 隔代组件通信
-// import FatherSix from './pages/selfEvent/Father.vue';
-// 7 vuex
-// import FatherSeven from './pages/selfEvent/Father.vue';
+// 5 $attrs/$listeners 适用于隔代组件通信
+import FatherFive from './pages/attrsAndListeners/Father.vue';
+// 6 provide / inject 适用于隔代组件通信
+import FatherSix from './pages/provideAndInject/Father.vue';
+// 7 vuex 适用于任意组件通信
+import FatherSeven from './pages/vuex/Father.vue';
 export default {
   name: "app",
   components: {
@@ -38,9 +38,9 @@ export default {
     FatherTwo,
     FatherThree,
     FatherFour,
-    // FatherFive,
-    // FatherSix,
-    // FatherSeven,
+    FatherFive,
+    FatherSix,
+    FatherSeven,
   },
 };
 </script>
