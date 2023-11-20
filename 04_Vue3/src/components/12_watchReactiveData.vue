@@ -43,7 +43,7 @@ export default {
 
     /**
      * 注意：
-     * 1、如果使用watch来去监听的reactive定义的一个响应式数据，则在监听当中无法获取到oldValue
+     * 1、如果使用watch来监听的reactive定义的一个响应式数据，则在监听当中无法获取到oldValue
      * 2、这里直接监听了reactive定义的数据，watch强制开启了深度监听（deep配置项无效，设置为false，依旧是深度监听）
      */
     watch(person, (newVal, oldVal) => {

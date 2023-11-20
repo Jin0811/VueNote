@@ -14,7 +14,7 @@ export default {
   /**
    * watchEffect的回调函数当中用到的任何ref数据和reactive数据，一旦这些数据发生了变化，就会重新触发watchEffect函数
    * 
-   * watchEffect和computed类似，但是computed注重的是计算出来的值，必须要要写返回值
+   * watchEffect和computed类似，但是computed注重的是计算出来的值，必须要写返回值
    * watchEffect注重的是过程，不需要写返回值
    */
 

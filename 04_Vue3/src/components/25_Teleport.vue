@@ -18,7 +18,7 @@ import { ref } from "vue";
 export default {
   /**
    * teleport是一个组件，可以指定模板的渲染节点
-   * to属性：'html' | 'body' | CSS SELECTER
+   * to属性：'html' | 'body' | css-selecter
    */
   setup(){
     let isShow = ref(false);

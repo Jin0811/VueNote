@@ -8,7 +8,7 @@ app.mount('#app');
 
 
 /**
- * 引入的不在是vue的构造函数了，引入的是一个名为createApp的工厂函数
+ * 引入的不再是vue的构造函数了，引入的是一个名为createApp的工厂函数
  * 
  * Vue2的挂载方法：
  * new Vue({

@@ -22,7 +22,7 @@ export default {
    * 计算属性
    */
 
-  // vue2当中可以读取到vue3当中的数据，所以第一中方法可以使用vue2当中的计算属性
+  // vue2当中可以读取到vue3当中的数据，所以第一种方法可以使用vue2当中的计算属性
   // computed: {
   //   count(){
   //     return this.countNums.num1 + this.countNums.num2;

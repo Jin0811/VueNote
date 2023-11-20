@@ -14,7 +14,7 @@ export default {
    * 
    * 注意：
    * 1、vue3是向下兼容的，vue3当中一样可以写vue2当中的data、method
-   * 2、不建议vue2和vue3的配置不要混用，vue2当中可以读取vue3当中的数据，但vue3当中不能读取vue2的数据
+   * 2、不建议vue2和vue3的配置混用，vue2当中可以读取vue3当中的数据，但vue3当中不能读取vue2的数据
    * 3、vue2和vue3当中的数据命名冲突时，以vue3的为主
    * 
    * 注意：
