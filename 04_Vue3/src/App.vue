@@ -39,7 +39,8 @@
 // 组件通信
 // import Demo from "./views/01_props/Parent.vue"; // props传值
 // import Demo from "./views/02_custom-event/Parent.vue"; // 自定义事件
-import Demo from "./views/03_event-bus/Parent.vue"; // 全局事件总线
+// import Demo from "./views/03_event-bus/Parent.vue"; // 全局事件总线
+import Demo from "./views/04_v-model/Parent.vue"; // v-model
 
 import { ref } from "vue";
 export default {
