@@ -14,6 +14,13 @@
 
 <script setup>
 /**
+ * vue2当中
+ * $attrs 接收参数
+ * $listeners 接收事件
+ * 
+ * vue3当中
+ * $attrs 同时接收参数和事件
+ * 
  * Child会接收dataForChild和handlerForChild
  * Child中的useAttrs，会获取到dataForGrandSon/handlerForGrandSon/info
  * GrandSon会接收dataForGrandSon和handlerForGrandSon
