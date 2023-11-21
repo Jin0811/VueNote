@@ -42,7 +42,8 @@
 // import Demo from "./views/03_event-bus/Parent.vue"; // 全局事件总线
 // import Demo from "./views/04_v-model/Parent.vue"; // v-model
 // import Demo from "./views/05_attrs-listeners/Parent.vue"; // attrs-listeners
-import Demo from "./views/06_ref-children-parent/Parent.vue"; // ref-children-parent
+// import Demo from "./views/06_ref-children-parent/Parent.vue"; // ref-children-parent
+import Demo from "./views/07_provide-inject/Parent.vue"; // provide-inject
 
 import { ref } from "vue";
 export default {
