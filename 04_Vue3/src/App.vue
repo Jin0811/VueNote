@@ -1,10 +1,12 @@
 <template>
-  <div class="container">
-    <Demo v-if="isShow" />
-  </div>
+  <div>
+    <div class="container">
+      <Demo v-if="isShow" />
+    </div>
 
-  <div class="btn-group">
-    <button @click="changeShow">{{ isShow ? "卸载组件" : "挂载组件" }}</button>
+    <!-- <div class="btn-group">
+      <button @click="changeShow">{{ isShow ? "卸载组件" : "挂载组件" }}</button>
+    </div> -->
   </div>
 </template>
 
@@ -32,36 +34,42 @@
 // import Demo from './components/23_CompositionAPI的优势'; // CompositionAPI的优势
 // import Demo from './components/25_Teleport'; // Teleport
 // import Demo from './components/26_0_Suspense'; // Suspense
-import Demo from './components/28_setup语法糖'; // setup语法糖
+// import Demo from './components/28_setup语法糖'; // setup语法糖
 
-import { ref } from 'vue';
+// 组件通信
+// import Demo from "./views/01_props/Parent.vue"; // props传值
+// import Demo from "./views/02_custom-event/Parent.vue"; // 自定义事件
+import Demo from "./views/03_event-bus/Parent.vue"; // 全局事件总线
+
+import { ref } from "vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Demo
+    Demo,
   },
-  setup(){
+  setup() {
     let isShow = ref(true);
-    function changeShow(){
+    function changeShow() {
       isShow.value = !isShow.value;
     }
 
     return {
       isShow,
-      changeShow
+      changeShow,
     };
-  }
-}
+  },
+};
 </script>
 
 <style>
-  .container{
-    padding: 15px;
-    background-color: #f1f1f1;
-  }
-  .btn-group{
-    margin-top: 20px;
-    padding: 15px;
-    background: royalblue;
-  }
+@import url("./assets/common.css");
+.container {
+  padding: 15px;
+  background-color: #f1f1f1;
+}
+.btn-group {
+  margin-top: 20px;
+  padding: 15px;
+  background: royalblue;
+}
 </style>
